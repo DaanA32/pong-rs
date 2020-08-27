@@ -8,6 +8,7 @@ use amethyst::{
     },
     input::{InputBundle, StringBindings},
     utils::application_root_dir,
+    ui::{RenderUi, UiBundle},
 };
 
 mod pong;
@@ -36,8 +37,10 @@ fn main() -> amethyst::Result<()> {
                 RenderToWindow::from_config_path(display_config_path)?
                     .with_clear([0.00196, 0.23726, 0.21765, 1.0]),
             )
-            .with_plugin(RenderFlat2D::default()),
+            .with_plugin(RenderFlat2D::default())
+            .with_plugin(RenderUi::default()),
         )?
+        .with_bundle(UiBundle::<StringBindings>::new())?
         .with(systems::MoveBallsSystem, "ball_system", &[])
         .with(systems::PaddleSystem, "paddle_system", &["input_system"])
         .with(
