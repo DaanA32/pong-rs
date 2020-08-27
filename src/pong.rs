@@ -18,6 +18,8 @@ use amethyst::{
     ui::{Anchor, LineMode, TtfFormat, UiText, UiTransform},
 };
 
+use crate::audio::initialise_audio;
+
 #[derive(Default)]
 pub struct Pong {
     ball_spawn_timer: Option<f32>,
@@ -40,6 +42,7 @@ impl SimpleState for Pong {
         initialise_scoreboard(world);
         initialise_paddles(world, self.sprite_sheet_handle.clone().unwrap());
         initialise_camera(world);
+        initialise_audio(world);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
